@@ -11,7 +11,7 @@ elif number % 7 == 0 and number % 3 == 0 :
 else:
     print(f"{number} is not divisible by 3 or 7")
 
- # add in git   
+
 
 
 

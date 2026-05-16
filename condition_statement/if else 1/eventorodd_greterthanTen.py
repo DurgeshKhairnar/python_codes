@@ -14,6 +14,3 @@
 #     print('number is odd but not 10 >')  
 
 
-name = input("Eneter your Name :")
-
-print(name.upper())
