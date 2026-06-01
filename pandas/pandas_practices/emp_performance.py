@@ -205,3 +205,65 @@ print("Names containing numbers.")
 for i in df['Name']:
     if re.search(r"\d",i):
         print(i)
+
+print("Names containing special characters.")
+for i in df['Name']:
+    if re.search(r"^[a-zA-Z0-9]",i):
+        print(i)        
+
+print("Valid emails.")
+for i in df['Email']:
+    if re.search(r"^[\w\.-]+@[\w\.-]+\.\w+$",i):
+        print(i)  
+
+print("Valid emails.")
+for i in df['Email']:
+    if re.search(r"^[\w\.-]+@[\w\.-]+\.\w+$",i):
+        print(i)  
+
+print("NOT Valid emails.")
+for i in df['Email']:
+    if not re.search(r"^[\w\.-]+@[\w\.-]+\.\w+$",i):
+        print(i)                  
+
+
+print("Invalid phone numbers.")
+print(df[df['Phone'].str.match(r"\d{10}",na=False)])
+
+print("Cities containing numbers.")
+for i in df['City']:
+    if not re.search(r"\d{10}",i):
+        print(i) 
+
+
+print("Cities containing special characters.")
+for i in df['City']:
+    if not re.search(r"^[a-zA-Z0-9]",i):
+        print(i)
+
+
+print("Emails ending with gmail.com.")
+print(df[df["Email"].str.endswith("gmail.com")])
+
+print("Convert names to uppercase.")
+df['Name'] = df['Name'].str.upper()
+print(df)
+
+
+print("Convert departments to lowercase.")
+df['Department'] = df['Department'].str.lower()
+print(df)
+
+print("Remove special characters from names.")
+df['Name'] = df['Name'].str.replace(r"[^a-zA-Z0-9]","",regex=True)
+print(df)
+
+
+print("Remove numbers from cities.")
+df['City'] = df['City'].str.replace(r"\d","",regex=True)
+print(df)
+
+
+
+
+
