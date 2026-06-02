@@ -263,7 +263,87 @@ print("Remove numbers from cities.")
 df['City'] = df['City'].str.replace(r"\d","",regex=True)
 print(df)
 
+print("Create Bonus = Salary × 10%.")
+df["Bonus"] = df['Salary'] * 0.1
+print(df)
+
+print("Create Tax = Salary × 5%.")
+df["Tax"] = df['Salary'] * 0.05
+print(df)
+
+print("Create NetSalary = Salary + Bonus − Tax.")
+df["NetSalary"] = df['Salary'] + df['Bonus'] - df['Tax']
+print(df['NetSalary'])
+
+print("Create Email_Status column.")
+df["Email_Status"] = np.where(df['Email'].str.match(r"^[\w\.-]+@[\w\.-]+\.\w+$",na=False),"Valid","Invalid")
+print(df[["Email","Email_Status"]])
+
+print("Create Phone_Status column.")
+df["Phone_Status"] = np.where(df['Phone'].str.match(r"\d{10}",na=False),"Valid","Invalid")
+print(df[["Phone","Phone_Status"]])
+
+print("Top 3 highest-paid employees.")
+print(df.sort_values('Salary',ascending=False).head(3))
+
+print("Lowest-paid employee.")
+print(df.sort_values('Salary'))
+
+print("Employee with highest rating.")
+print(df.sort_values('Rating',ascending=False))
+
+print("Average experience department-wise.")
+print(df.groupby('Department')["Experience"].mean().astype(int))
+
+print("Most common city.")
+print(df['City'].mode())
+
+print("Count unique cities.")
+print(df['City'].unique())
+
+print("Find duplicate emails.")
+print(df[df["Email"].duplicated()])
+
+print("Remove duplicate rows.")
+df = df.drop_duplicates()
+print(df)
+
+print("Reset index")
+df = df.reset_index()
+print(df)
+
+print("Rename Salary → Income.")
+df = df.rename(columns = {"Salary":"Income"})
+print(df)
 
 
+# print("Drop Rating column.")
+# df = df.drop()
+
+print("Show only IT employees sorted by salary descending.")
+print(df[df['Department'] == 'it'].sort_values("Income",ascending=False))
+
+print("Find employees whose names contain exactly one number.")
+print(df[df['Name'].str.match(r"\d{1}")])
 
 
+print("Find employees whose names contain exactly one number.")
+print(df[df['Name'].str.match(r"\d{1}")])
+
+
+print("Lowest paid emp")
+print(df.loc[df['Income'].idxmin()])
+
+
+print("Find employees whose names contain exactly one number")
+print(df[df['Name'].str.count(r"\d") == 1])
+
+print("Phone_Status")
+print(df[df["Phone"].str.match(r"^\d{10}$")])
+
+
+print("Emp with valid email and valid phone")
+
+valid_email = df['Email'].str.match(r"^[\w\.-]+@[\w\.-]+\.\w+$",na=False)
+valid_phone = df['Phone'].str.match(r"^\d{10}$",na=False)
+print(df[valid_email&valid_phone])
